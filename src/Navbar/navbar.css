@@ -592,7 +592,7 @@ footer {
 @media (max-width: 480px){
     .loginform{
         width: 90%;
-        margin-top: 80px;
+        margin-top: 150px;
     }
 }
 
@@ -645,6 +645,6 @@ footer {
 @media (max-width:480px){
     .signupform{
         width: 90%;
-        margin-top: 80px;
+        margin-top: 150px;
     }
 }
