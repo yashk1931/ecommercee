@@ -1,0 +1,650 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    color: #111;
+    line-height: 1.6;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-bottom: 1px solid #eee;
+    z-index: 1000;
+}
+
+.name {
+    margin-left: 40px;
+    cursor: pointer;
+}
+
+.sneakers {
+    text-decoration: none;
+    color: black;
+}
+
+.navs {
+    margin-right: 68px;
+}
+
+.nav-icon {
+    display: flex;
+    list-style: none;
+}
+
+.nav-icon a {
+    color: rgb(88, 88, 106);
+    text-decoration: none;
+    padding: 20px;
+    transition: 0.2s ease;
+}
+
+.nav-icon a:hover {
+    color: #111;
+}
+
+#cart {
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+.container {
+    background-image: url("../../public/pictures/banner.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 350px;
+    padding: 70px 50px;
+    margin-top: 90px;
+}
+
+.container h1 {
+    font-weight: bold;
+    max-width: 500px;
+}
+
+.container p {
+    color: rgb(99, 109, 132);
+    max-width: 600px;
+
+}
+
+.container h1 span {
+    color: #e11d48;
+}
+
+.Bshop {
+    width: 100px;
+    height: 40px;
+    border-radius: 30px;
+    background-color: #e11d48;
+    ;
+    color: white;
+    font-size: 16px;
+    border: none;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background 0.2s;
+}
+
+.Bshop:hover {
+    background-color: #c0103b;
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.companycard {
+    flex: 0 0 30%;
+    height: 260px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.companycard img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.9s ease;
+}
+
+.companycard:hover img {
+    transform: scale(1.1);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    color: #777;
+    border-top: 1px solid #eee;
+    background: #fafafa;
+    margin-top: 4rem;
+}
+
+.nav-icon li {
+    position: relative;
+}
+
+.drop {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    min-width: 160px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.1s ease;
+    z-index: 2000;
+
+}
+
+.nav-icon li:hover .drop {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.drop li a {
+    display: block;
+    color: #333;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.drop li a:hover {
+    background: #f2f2f2;
+    color: #e11d48;
+}
+
+.products {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.products h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    border: 1px solid #eee;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: #fff;
+}
+
+.card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
+    padding: 1rem;
+}
+
+.card-content h3 {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.card-content p {
+    color: #666;
+    margin-bottom: 0.8rem;
+}
+
+.card-content .price {
+    font-weight: 700;
+    color: #000;
+}
+
+.add-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-btn:hover {
+    background: #e11d48;
+}
+
+.products h2 {
+    margin-top: 100px;
+}
+
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -350px;
+    width: 350px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.15);
+    transition: right 0.3s ease;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-sidebar.open {
+    right: 0;
+    width: 350px;
+    overflow-y: scroll;
+}
+
+@media (max-width: 768px) {
+    .cart-sidebar {
+        width: 100%;
+        right: -100%;
+    }
+
+    .cart-sidebar.open {
+        right: 0;
+    }
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-header h2 {
+    font-size: 1.3rem;
+    color: #111;
+}
+
+.close-cart {
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.2s;
+}
+
+.close-cart:hover {
+    color: #e11d48;
+}
+
+.cart-content {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex-grow: 1;
+    color: #666;
+}
+
+.close-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    font-size: 30px;
+    border-bottom: 1px solid rgb(220, 202, 202);
+    margin-bottom: 10px;
+    cursor: pointer;
+
+}
+
+.cart-icon {
+    cursor: pointer;
+}
+
+.cart-sidebar.open {
+    right: 0;
+}
+
+.cart-sidebar.open h2 {
+    cursor: pointer;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+.cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cart-item div {
+    flex: 1;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.cart-item h4 {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.cart-item p {
+    font-size: 13px;
+    color: #666;
+
+}
+
+.Product-remove-bttn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 6px;
+    align-self: center;
+}
+
+.Product-remove-bttn:hover {
+    color: #e11d48;
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.cart-total {
+    margin-top: 350px;
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    padding: 15px;
+    background: #d21111;
+    border-top: 1px solid #ddd;
+}
+
+.cart-total h3 {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+}
+@media (max-width: 1024px) {
+
+    .container {
+        padding: 60px 30px;
+        height: auto;
+    }
+
+    .container h1 {
+        width: 100%;
+        font-size: 32px;
+    }
+
+    .container p {
+        width: 100%;
+        font-size: 15px;
+    }
+
+    .companycard {
+        width: 45%;
+        height: 250px;
+    }
+
+    .nav-icon a {
+        padding: 15px;
+    }
+}
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .name {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .navs {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .container {
+        padding: 40px 20px;
+        height: auto;
+        margin-top: 120px;
+    }
+
+    .container h1 {
+        font-size: 26px;
+        width: 100%;
+    }
+
+    .container p {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .Bshop {
+        width: 120px;
+        height: 38px;
+        font-size: 14px;
+    }
+
+    .cards {
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .companycard {
+        flex: 0 0 48%;
+        height: 200px;
+    }
+
+    .products {
+        padding: 0 1rem;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card img {
+        aspect-ratio: 1 / 1;
+    }
+
+    .cart-sidebar {
+        width: 100%;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .name {
+        margin: 0;
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+
+    .navs {
+        margin: 0;
+        width: 100%;
+    }
+
+    .nav-icon {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .nav-icon a {
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .products h2 {
+        margin-top: 130px;
+    }
+    .cart-icon{
+        margin-top: -40px;
+        margin-left: auto;
+    }
+}
+@media (max-width: 395px) {
+    .cards {
+        padding: 8px;
+        gap: 10px;
+    }
+    .companycard {
+        flex: 1 1 100%;
+        max-width: 100%; 
+        height: 240px;
+    }
+}
+
+.loginform{
+    width: 350px;
+    margin: 120px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+.loginform h2{
+    margin-bottom: 20px;
+    color: #111;
+}
+.loginform input{
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+.loginform input:focus{
+    border-color: #000;
+}
+.loginform button{
+    width: 100%;
+    padding: 12px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.loginform button:hover{
+    background: #333;
+}
+@media (max-width: 480px){
+    .loginform{
+        width: 90%;
+        margin-top: 80px;
+    }
+}
+
+.signupform{
+    width: 350px;
+    margin: 120px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.signupform h2{
+    margin-bottom: 20px;
+    color: #111;
+}
+
+.signupform input{
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.signupform input:focus{
+    border-color: #000;
+}
+
+.signupform button{
+    width: 100%;
+    padding: 12px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.signupform button:hover{
+    background: #333;
+}
+
+@media (max-width:480px){
+    .signupform{
+        width: 90%;
+        margin-top: 80px;
+    }
+}
