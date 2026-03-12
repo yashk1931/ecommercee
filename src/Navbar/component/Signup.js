@@ -1,91 +1,66 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+require('dotenv').config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
-export default function Signup({ setCurrentUser }) {
+const app = express();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+}));
+app.use(express.json());
 
-  const navigate = useNavigate();
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log("MongoDB Connected"))
+    .catch(err => console.log("MongoDB connection error:", err));
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-
-      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password })
-      });
-
-      const data = await res.json();
-
-      if (data.success === true) {
-
-        alert("Signup successful");
-
-        localStorage.setItem("currentUser", JSON.stringify(data.user));
-
-        if(setCurrentUser){
-          setCurrentUser(data.user);
+const UserSchema = new mongoose.Schema({
+    name: String,
+    email: { type: String, unique: true },
+    password: String,
+    cart: [
+        {
+            name: String,
+            price: Number,
+            image: String,
+            quantity: Number
         }
+    ]
+});
 
-        navigate("/");
+const User = mongoose.model("User", UserSchema, "users");
 
-      } else {
+app.post("/signup", async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+        if (!name || !email || !password)
+            return res.json({ success: false, message: "All fields required" });
 
-        alert(data.message);
+        const existing = await User.findOne({ email });
+        if (existing)
+            return res.json({ success: false, message: "User already exists" });
 
-      }
+        const user = new User({ name, email, password, cart: [] });
+        await user.save();
 
-    } catch (error) {
-
-      console.error(error);
-      alert("Server connection failed");
-
+        res.json({ success: true, message: "Signup successful", user });
+    } catch (err) {
+        res.json({ success: false, message: err.message });
     }
-  };
+});
 
-  return (
-    <div className="signupform">
+app.post("/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne({ email, password });
+        if (!user) return res.json({ success: false, message: "Invalid email or password" });
 
-      <h2>Signup</h2>
+        res.json({ success: true, message: "Login successful", user });
+    } catch (err) {
+        res.json({ success: false, message: "Server error" });
+    }
+});
 
-      <form onSubmit={handleSubmit}>
-
-        <input
-          placeholder="Name"
-          value={name}
-          onChange={(e)=>setName(e.target.value)}
-          required
-        />
-
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e)=>setEmail(e.target.value)}
-          required
-        />
-
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e)=>setPassword(e.target.value)}
-          required
-        />
-
-        <button type="submit">Signup</button>
-
-        <p>
-          Already have account? <Link to="/login">Login</Link>
-        </p>
-
-      </form>
-
-    </div>
-  );
-}
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
