@@ -14,11 +14,13 @@ export default function Signup({ setCurrentUser }) {
 
     try {
 
-      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
+      const res = await fetch("/Backend/signup", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+        "Content-Type": "application/json"
+      },
         body: JSON.stringify({ name, email, password })
-     });
+});
 
       const data = await res.json();
 
