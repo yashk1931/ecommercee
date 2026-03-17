@@ -51,57 +51,75 @@ function App() {
   }, [currentUser]);
 
   async function addtocart(item) {
-    const user = JSON.parse(localStorage.getItem("currentUser"));
 
-    if (!user) {
-      alert("Please login first");
-      return;
-    }
+  const user = JSON.parse(localStorage.getItem("currentUser"));
 
-    if (!item || !item.name) {
-      console.log("Invalid item:", item);
-      return;
-    }
-
-    try {
-      const res = await fetch("http://localhost:5000/add-to-cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          userId: user._id,
-          item: item
-        })
-      });
-
-      const data = await res.json();
-
-      console.log("Add to cart response:", data);
-
-      if (data.success) {
-        setCartItems(data.cart);
-      }
-
-    } catch (error) {
-      console.log("Add to cart error:", error);
-    }
+  if (!user) {
+    alert("Please login first");
+    return;
   }
 
-  function removeItem(index) {
+  try {
 
-    const newCart = cartItems
-      .map((item, i) =>
-        i === index
-          ? (item.quantity > 1
-            ? { ...item, quantity: item.quantity - 1 }
-            : null)
-          : item
-      )
-      .filter(item => item !== null);
+    const res = await fetch("/api/add-to-cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userId: user._id,
+        item: item
+      })
+    });
 
-    setCartItems(newCart);
+    const data = await res.json();
+
+    if (data.success) {
+      setCartItems(data.cart);
+    }
+
+  } catch (error) {
+
+    console.log("Add to cart error:", error);
+
   }
+
+}
+ async function removeItem(index) {
+
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (!user) {
+    alert("Please login first");
+    return;
+  }
+
+  try {
+
+    const res = await fetch("/api/remove-from-cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userId: user._id,
+        index: index
+      })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      setCartItems(data.cart);
+    }
+
+  } catch (error) {
+
+    console.log("Remove cart error:", error);
+
+  }
+
+}
 
 
   return (
