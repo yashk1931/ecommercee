@@ -13,10 +13,8 @@ import WoFormal from './Navbar/component/women/WFormal';
 import Home from './Home/home';
 import Login from './Navbar/component/Login';
 import Signup from './Navbar/component/Signup';
-import { useNavigate } from "react-router-dom";
 
 function App() {
-const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -57,7 +55,6 @@ const navigate = useNavigate();
 
   if (!user) {
     alert("Please login first");
-    navigate("/login");
     return;
   }
 
