@@ -37,26 +37,19 @@ export default async function handler(req, res) {
 
     const user = await User.findById(userId);
 
-    if (!user) {
+    if (!user){
       return res.json({
         success: false,
         message: "User not found"
       });
     }
-
-    // check if item already exists in cart
     const existingItemIndex = user.cart.findIndex(
       (cartItem) => cartItem.name === item.name
     );
 
-    if (existingItemIndex !== -1) {
-
-      // increase quantity
+    if (existingItemIndex !== -1){
       user.cart[existingItemIndex].quantity += 1;
-
-    } else {
-
-      // add new item
+    } else{
       user.cart.push({
         name: item.name,
         price: item.price,
