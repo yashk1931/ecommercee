@@ -13,6 +13,7 @@ import WoFormal from './Navbar/component/women/WFormal';
 import Home from './Home/home';
 import Login from './Navbar/component/Login';
 import Signup from './Navbar/component/Signup';
+import { useNavigate } from "react-router-dom";
 
 function App() {
 
@@ -86,11 +87,12 @@ function App() {
 
 }
  async function removeItem(index) {
-
+const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("currentUser"));
 
   if (!user) {
     alert("Please login first");
+    navigate("/login"); 
     return;
   }
 
